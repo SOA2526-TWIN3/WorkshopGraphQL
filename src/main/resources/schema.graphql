@@ -21,7 +21,37 @@ type UniteEnseignement {
 }
 type Queries{
     getallModules:[Module]
+    getModulesByType(typeM:TypeModule):[Module]
+    getAllUE: [UniteEnseignement!]
+    getUEByCode(code: Int!): UniteEnseignement
+    getUEByDomaine(domaine: String!): [UniteEnseignement]
+    getUEBySemestre(semestre: Int!): [UniteEnseignement]
+}
+type Mutations {
+    addModule(matricule:String,libelle:String,
+        coef:Int,volumeHorraire:Int,codeUE:Int,type:TypeModule):Boolean
+    updateModule(matricule:String,libelle:String,
+        coef:Int,volumeHorraire:Int,type:TypeModule,codeUE:Int):Module
+    deleteModule(matricule:String):String
+    addUniteEnseignement(
+        code: Int!
+        domaine: String!
+        responsable: String!
+        credits: Int!
+        semestre: Int!
+    ): Boolean
+
+    updateUniteEnseignement(
+        code: Int!
+        domaine: String!
+        responsable: String!
+        credits: Int!
+        semestre: Int!
+    ): Boolean
+
+    deleteUniteEnseignement(code: Int!): Boolean
 }
 schema {
     query: Queries
+    mutation: Mutations
 }
